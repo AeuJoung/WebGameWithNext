@@ -1,0 +1,67 @@
+/*메인페이지 게임 선택 박스 */
+.buttonBox {
+    width: 250px;
+    height:180px;
+    border-radius: 10px;
+    margin: 50px 20px;
+    background-color: white;
+    box-shadow: 0 0 20px 1px gray;
+    transition: .2s;
+}
+.buttonBox:hover {
+    transform:scale(1.05);  
+    box-shadow: 0 0 20px 1px burlywood;
+}
+
+.buttonBox .linkBox {
+    display: flex;
+    height:100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding : 10px;
+}
+.buttonBox .linkBox .gameName {
+    font-size: large;
+    font-weight: bold;
+    background-color: bisque;
+    width : 80%;
+    margin : 0px auto 10px;
+    padding : 5px;
+    border-radius: 10px;
+    text-align: center;
+}
+.buttonBox .linkBox .gameDes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    width : 100%;
+    margin : 0px auto;
+    padding : 10px;
+    border-radius: 10px;
+    text-align: center;
+    flex-grow: 1;
+    white-space:pre-wrap;
+}
+
+/*백버튼 css*/
+.backButtonContainer {
+    z-index: 999;
+    position: fixed;
+    top : 50px;
+    left : 50px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(15, 20, 25, 0.1);
+    border: none;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.backButtonContainer:hover {
+    background-color: white;
+    fill : brown
+}

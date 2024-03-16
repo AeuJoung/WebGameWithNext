@@ -1,95 +1,29 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./main.module.css";
+import { Alkatra } from "next/font/google";
+
+import GameSelectButton from "./_component/GameSelectButton";
+
+const alkatra = Alkatra({
+  subsets: ["latin"]
+})
+
+const titleClass = `${alkatra.className} ${styles.title}`;
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <h1 className={titleClass}>WBB GAME</h1>
+      <section className={styles.container_up}>
+        <GameSelectButton value={{name : '구구단', src:'gugudan', des : '재밌고 쉬운\n구구단 게임'}}/>
+        <GameSelectButton value={{name : '끝말잇기', src:'wordchain', des : '한글로 하는 끝음절\n기차놀이'}}/>
+        <GameSelectButton value={{name : '숫자야구', src:'numbaseball', des : '컴퓨터의 숫자를\n맞춰보세요'}}/>
+      </section>
+      <section className={styles.container_down}>
+        <GameSelectButton value={{name : '가위바위보', src:'rsp', des : '가위, 바위 보\n당신의 선택은?'}}/>
+        <GameSelectButton value={{name : '로또번호 추첨기', src:'lotto', des : "TODAY'S\n행운의 번호 뽑기"}}/>
+        <GameSelectButton value={{name : 'Tic-Tac-Toe', src:'tictactoe', des : '먼저 이어진\n세 칸을 만들면 승리'}}/>
+        <GameSelectButton value={{name : '지뢰찾기', src:'minesweeper', des : '지뢰를 어디에\n심었을까요?'}}/>
+      </section>
     </main>
   );
 }

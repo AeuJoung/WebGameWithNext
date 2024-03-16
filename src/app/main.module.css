@@ -1,0 +1,51 @@
+.backround {
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  backdrop-filter: blur(10px);
+}
+.backround::before {
+  
+  content: "";
+  width:100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  top:0px; 
+  left:0px;
+  background-color: white;
+  opacity: 30%;
+}
+
+/**/
+
+.main {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height:100%;
+  margin : 0 auto;
+}
+
+.title {
+  font-size: 100px;
+  color:white;
+  text-shadow: 0px 0px 40px chocolate;
+}
+
+.container_up {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.container_down {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
