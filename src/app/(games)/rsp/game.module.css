@@ -1,0 +1,9 @@
+.gameBoard {
+    display: flex;
+    flex-direction: column;
+}
+
+.rspBoard {
+    display: flex;
+    flex-direction: row;
+}

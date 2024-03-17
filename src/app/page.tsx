@@ -12,7 +12,7 @@ const titleClass = `${alkatra.className} ${styles.title}`;
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h1 className={titleClass}>WBB GAME</h1>
+      <h1 className={titleClass}>WEB GAME</h1>
       <section className={styles.container_up}>
         <GameSelectButton value={{name : '구구단', src:'gugudan', des : '재밌고 쉬운\n구구단 게임'}}/>
         <GameSelectButton value={{name : '끝말잇기', src:'wordchain', des : '한글로 하는 끝음절\n기차놀이'}}/>

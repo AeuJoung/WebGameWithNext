@@ -1,0 +1,16 @@
+.def {
+    color : red;
+}
+
+.kindOf {
+    color : yellow;
+}
+
+.same {
+    color : green;
+}
+
+.keyBox {
+    border-color: red;
+    outline: red;
+}
