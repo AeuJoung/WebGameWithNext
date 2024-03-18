@@ -34,7 +34,6 @@ const makeNum = () => {
   }, []);
 
   useEffect(()=>{
-    console.log(answerList.length);
     if (answerList.length==6) {
       let countt =0;
       for (let i=0 ; i<6 ; i++) {
@@ -58,7 +57,6 @@ const makeNum = () => {
       if (uAns.length != 6) {
         setState(false);
       } else {
-        //console.log(state);
         let makeList : number[][] = new Array(6);
         for (let i=0 ; i<6 ; i++) {
           if (Number(uAns[i]) == comAns[i]) makeList[i]=[Number(uAns[i]), states.same];
@@ -67,7 +65,6 @@ const makeNum = () => {
         }
 
         currentState.push(makeList);
-        console.log(currentState);
         setCount(count+1);
         setState(true);
         setAnserList(currentState);

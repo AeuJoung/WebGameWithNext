@@ -10,7 +10,6 @@ interface propsType {
 let classNames = [styles.def, styles.kindOf, styles.same];
 
 const Tr = ({line} : propsType) => {
-    console.log(line);
     return (
         <tr>
             {line.map((v, i)=><td className={classNames[v[1]+1]} key={i}>{v[0]}</td>)}

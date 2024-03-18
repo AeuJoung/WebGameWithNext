@@ -1,0 +1,29 @@
+
+.cell {
+    border: 1px solid gainsboro;
+    text-align: center;
+    vertical-align: middle;
+    cursor:grab;
+}
+.clicked {
+    background-color: aquamarine;
+    cursor: pointer;
+}
+
+
+.whiteBox {
+    z-index: 1;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: white;
+    border-radius: 20px;
+    opacity: 70%;
+}
+
+.resultBox {
+    position: relative;
+    z-index :2 ;
+}
