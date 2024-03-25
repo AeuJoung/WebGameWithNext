@@ -3,11 +3,11 @@
     border: 1px solid gainsboro;
     text-align: center;
     vertical-align: middle;
-    cursor:grab;
+    cursor:pointer;
 }
 .clicked {
     background-color: aquamarine;
-    cursor: pointer;
+    cursor: default;
 }
 
 

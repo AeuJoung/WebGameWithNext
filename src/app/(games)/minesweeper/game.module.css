@@ -1,0 +1,29 @@
+.gameSelect {
+    display: flex;
+    flex-direction: row;    
+}
+
+.modeBox {
+    width: 100px;
+    height: 100px;
+}
+
+.td {
+    width:35px;
+    height:30px;
+    background-color :  white;
+    cursor:default;
+}
+
+.mineCell {
+    background-color :  red;
+}
+.flagCell {
+    background-color :  yellow;
+}
+.questCell {
+    background-color :  skyblue;
+}
+.openCell {
+    background-color :  greenyellow;
+}

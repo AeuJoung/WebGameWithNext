@@ -1,82 +1,99 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, MouseEvent, useEffect } from "react";
 import styles from "./game.module.css"
-import Ul from "./Ul";
 
-const makenum = () => {
-  let nums = [];
-  for (let i=0 ; i<7 ; i++) {
-    nums.push(Math.floor(Math.random()*45)+1);
+const makeNumber = () => {
+  let newArray = [];
+  for (let i=0 ; i<8 ; i++) {
+    newArray.push(Math.floor(Math.random()*45)+1);
   }
-  return nums;
+
+  return newArray;
 }
 
 export default function Page() {
-{
-  return (<></>)
-  /*
-  const [numbers, setNumbers] = useState<number[][]>([]);
-  const [toggle, setToggle] = useState<Boolean>(true);
-  const [result, setResult] = useState<string>("번호 추첨 중...");
-  const [count, setCount] = useState<number>(0);
-  const timer = useRef<NodeJS.Timeout>();
-  const timerout = useRef<NodeJS.Timeout>();
+  const [displayArray, setDisplayArray] = useState<number[][]>([]);
+  const [curArray, setCurArray] = useState<number[]>([]);
+  const [stage, setStage] = useState<number>(0)
+  const [gameState, setGameState] = useState<boolean>(false);
+  const numBuffer = useRef<number[]>([]);
+  const timeout = useRef<NodeJS.Timeout>();
+  const interval = useRef<NodeJS.Timeout>();
+
 
   useEffect(()=>{
-    timer.current= setInterval(()=>{
-      console.log(count);
-      setCount(count+1);
-    }, 1000);
+    if (stage!=0 && curArray.length<7) {
+      numBuffer.current = makeNumber();
 
-    return ()=>{ 
-      clearInterval(timer.current);
+      let newArray : number[] = [... curArray];
+  
+      interval.current = setInterval(()=>{
+        console.log(numBuffer.current[0])
+        newArray.push(numBuffer.current.shift());
+        setCurArray([... newArray]);
+      }, 1000);
+  
+      timeout.current = setTimeout(() => {
+        clearInterval(interval.current);
+  
+        console.log(numBuffer.current[0])
+        newArray.push(numBuffer.current.shift());
+        
+        let fullArray = [... displayArray];
+        fullArray.push(curArray);
+        console.log(fullArray);
+
+        setCurArray([... newArray]);
+        setDisplayArray(fullArray)
+      }, 6500);
     }
-  }, [count, toggle])
 
-  useEffect(()=>{
-    timerout.current = setTimeout(()=>{
-      clearInterval(timer.current);
-    }, 7100);
-
-    return ()=>{ 
-      clearTimeout(timerout.current);
+    return ()=>{
+      clearTimeout(timeout.current);
+      clearInterval(interval.current);
     }
-  }, [toggle])
+  }, [stage, curArray, displayArray])
 
+  const onNextButtonEvent = (e : MouseEvent<HTMLElement>) => {
+    e.preventDefault();
 
-  const runEvent = () => {
-    clearInterval(timer.current);
-    clearTimeout(timerout.current);
-
-    let lists = numbers;
-    numbers.push(makenum());
-
-    
-    setToggle(!toggle);
-    setCount(0);
-    setNumbers(lists);
-  } 
-
-  const onClickEvent = (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault();
-      runEvent();
+    setCurArray([]);
+    setStage(stage+1);
   }
-
-  const restartEvent = (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault();
-  }
-
+  
   return (
-      <section className={styles.gameBoard}>
-        <div className={styles.numberBox}>
-           {numbers.map((v, i)=><Ul value={v} key={i} />)}
-        </div>
-        <div>
-          <button onClick={onClickEvent}>다음 세트</button>
-          <button onClick={restartEvent}>다시 뽑기</button>
-        </div>
+    <section className={styles.gameBoard}>
+      <label>{stage}/7 Round</label>
+      <section className={styles.displayNumber}>
+        
+        {displayArray.map((v, i)=> {
+          return <ul key={i}>{v.map((vv, ii)=> {
+            return <li className={styles.list} key={ii}>{vv}</li>
+          })}</ul>
+        })}
+
+        <ul>{curArray.map((v, i)=> {
+            return <li className={styles.list} key={i}>{v}</li>
+        })}</ul>
+
+        <ul>
+          <li className={styles.list}>12</li>
+          <li className={styles.list}>12</li>
+          <li className={styles.list}>12</li>
+          <li className={styles.list}>12</li>
+        </ul>
+        <ul>
+          <li className={styles.list}>13</li>
+          <li className={styles.list}>13</li>
+          <li className={styles.list}>13</li>
+          <li className={styles.list}>13</li>
+        </ul>
       </section>
+      <section>
+        <button onClick={onNextButtonEvent}>다음 뽑기</button>
+        <button>재시작</button>
+      </section>    
+    </section>
   );
-  */}
 }
