@@ -9,21 +9,44 @@
 }
 
 .td {
+    position: relative;
     width:35px;
     height:30px;
-    background-color :  white;
+    cursor:default;
+}
+
+.td::before {
+    position: absolute;
+    top:0px;
+    left:0px;
+    content: "";
+    width:inherit; 
+    height:inherit;
+    background-color: white;
     cursor:default;
 }
 
 .mineCell {
     background-color :  red;
 }
-.flagCell {
+.mineCell::before {
+    display: none;
+}
+
+
+.flagCell::before {
     background-color :  yellow;
+    content: "!";
 }
-.questCell {
+
+.questCell::before {
     background-color :  skyblue;
+    content: "?";
 }
+
 .openCell {
     background-color :  greenyellow;
+}
+.openCell::before {
+    display: none;
 }

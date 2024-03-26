@@ -37,6 +37,19 @@ const makeGameBoard = (size : number, nom : number) => {
 }
 
 
+const isWinning = (state : stateType ,newBoard : number[][]) : boolean =>{
+  let count = 0;
+  for (let i=0 ; i<newBoard.length ; i++) {
+    for (let j=0 ; j<newBoard[0].length ; j++) {
+      if (newBoard[i][j]==numState.open) count++;
+    }
+  }
+
+  if (count==sizeMode[state.gameMode]*sizeMode[state.gameMode]-minesMode[state.gameMode]) return true
+  else return false;
+}
+
+
 const reducer = (state : stateType, action : actionType) : stateType => {
   switch(action.type) {
     case actionName.GAMESTART : {
@@ -77,19 +90,59 @@ const reducer = (state : stateType, action : actionType) : stateType => {
           //숫자칸이라면 숫자칸만 열기
 
           newBoard[pos.x][pos.y]=numState.open;
-          console.log("숫자칸 업뎃")
-          return {
-            ...state,
-            playBoard : newBoard
+
+          if (isWinning(state, newBoard)) {
+            return {
+              ...state,
+              playBoard : newBoard,
+              result : "성공!",
+              gameState : "종료"
+            }
+          } else {
+            return {
+              ...state,
+              playBoard : newBoard
+            }
           }
         } else {
           //빈칸이라면 빈칸과 주변 숫자 확 열기
+          
+          let checkArray = [];
+          checkArray.push([pos.x, pos.y]);
+          newBoard[pos.x][pos.y] = numState.open;
 
-          newBoard[pos.x][pos.y]=numState.open;
-          console.log("빈칸 업뎃")
-          return {
-            ...state,
-            playBoard : newBoard
+          let operX = [-1, 0, 1];
+          let operY = [-1, 0, 1];
+
+          while(checkArray.length>0) {
+            let [cx, cy] : number[] = checkArray.splice(0, 1)[0];
+            
+            for (let i=0 ; i<operX.length ; i++) {
+              for (let j=0 ; j<operY.length ; j++) {
+                let [sx, sy] : number[] = [cx+operX[i], cy+operY[j]];
+                if (sx>=0 && sx<newBoard.length && sy>=0 && sy<newBoard[0].length && newBoard[sx][sy]!=numState.open) {
+                  if (state.gameBoard[sx][sy]>=numState.normal) {
+                    if (state.gameBoard[sx][sy]==numState.normal) checkArray.push([sx, sy]);
+                    newBoard[sx][sy] = numState.open;
+                  } 
+                }
+              }
+            }
+            
+          }
+
+          if (isWinning(state, newBoard)) {
+            return {
+              ...state,
+              playBoard : newBoard,
+              result : "성공!",
+              gameState : "종료"
+            }
+          } else {
+            return {
+              ...state,
+              playBoard : newBoard
+            }
           }
         }
     }
@@ -97,17 +150,21 @@ const reducer = (state : stateType, action : actionType) : stateType => {
         if (action.pos==undefined) return state;
         let pos = action.pos;
         let newBoard = [... state.playBoard];
+        let flagPoint = 0;
         if (newBoard[pos.x][pos.y]==numState.flag) {
           newBoard[pos.x][pos.y] = numState.question;
+          flagPoint=-1;
         } else if (newBoard[pos.x][pos.y]==numState.question) {
           newBoard[pos.x][pos.y] = numState.normal;
         } 
         else {
           newBoard[pos.x][pos.y] = numState.flag
+          flagPoint = 1;
         }
 
         return {
           ...state,
+          numOfFlag : state.numOfFlag+flagPoint,
           playBoard : newBoard
         }
     }
@@ -163,16 +220,18 @@ export default function Page() {
           :
         <>
         <section className={styles.gameData}>
-          <label>지뢰 수 : {minesMode[state.gameMode]}</label>
+          <label>총 지뢰 수 : {minesMode[state.gameMode]}</label>
+          <label>남은 지뢰 수 : {minesMode[state.gameMode]-state.numOfFlag}</label>
           <Timer state={state.gameState}/>
         </section>
       
-        <section className={styles.gameTable} onClickCapture={gameCheck}>
+        <section className={styles.gameTable} onClickCapture={gameCheck} onContextMenuCapture={gameCheck}>
           <TableContext.Provider value={contextValue}>
             <Table tableData={state.playBoard} />
           </TableContext.Provider>          
         </section>
         <section>
+          <h5>{state.result}</h5>
           <button onClick={restartEvent}>재시작</button>
         </section>
         </>

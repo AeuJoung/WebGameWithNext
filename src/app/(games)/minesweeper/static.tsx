@@ -21,6 +21,7 @@ export interface stateType {
 
     gameBoard : number[][];
     playBoard : number[][];
+    numOfFlag : number;
     result : string;
     gameState : string
 } 
@@ -29,6 +30,7 @@ export const stateInit = {
     gameMode : 0,
     numOfMine : 0,
 
+    numOfFlag : 0,
     gameBoard : [[]], //숫자, 지뢰 적힌 칸
     playBoard : [[]], //깃발, 오픈 데이터
     result : "",
