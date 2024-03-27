@@ -34,7 +34,7 @@ const makeGameBoard = (size : number, nom : number) => {
   }
 
   return gamepan;
-}
+} 
 
 
 const isWinning = (state : stateType ,newBoard : number[][]) : boolean =>{
