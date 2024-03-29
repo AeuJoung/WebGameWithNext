@@ -1,6 +1,11 @@
-export default function Li({listData} : {listData : number[]}) {
+import React from "react"
+import styles from "./game.module.css"
+
+function Li({listData} : {listData : number[]}) {
     return (<>
-    {listData.map((v, i)=><li key={i}>{v}</li>)}
+    {listData.map((v, i)=><li className={styles.listStyle} key={i}>{v}</li>)}
     </>    
     )  
 }
+
+export default React.memo(Li)
