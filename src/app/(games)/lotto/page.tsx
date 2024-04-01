@@ -27,7 +27,7 @@ export default function Page() {
           } else {
             timer.current=setTimeout(()=>{
               let isContinue = true;
-              if (round==7) isContinue=false;
+              if (round==7) isContinue=false; 
 
               newNums.push(currendArray[count]);
               let storedArray = [... numArray];
