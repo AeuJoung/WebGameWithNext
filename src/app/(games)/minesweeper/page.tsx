@@ -1,8 +1,8 @@
 "use client"
 
-import { Dispatch, MouseEvent, useReducer, createContext, useEffect, useRef } from "react";
+import { MouseEvent, useReducer} from "react";
 import styles from "./game.module.css"
-import { stateInit, numState, stateType, actionType, actionName } from "./static"
+import { stateInit, numState, stateType, actionType, actionName, ContextType, TableContext } from "./interface"
 import Table from "./Table";
 import Timer from "./Timer";
 
@@ -114,7 +114,7 @@ const reducer = (state : stateType, action : actionType) : stateType => {
           let operX = [-1, 0, 1];
           let operY = [-1, 0, 1];
 
-          while(checkArray.length>0) {
+          while(checkArray.length>0 && checkArray) {
             let [cx, cy] : number[] = checkArray.splice(0, 1)[0];
             
             for (let i=0 ; i<operX.length ; i++) {
@@ -177,12 +177,6 @@ const reducer = (state : stateType, action : actionType) : stateType => {
   }
 }
 
-export interface ContextType {
-  gameBoard : number[][];
-  dispatch : Dispatch<actionType>;
-}
-
-export const TableContext = createContext<ContextType | null>(null);
 
 export default function Page() {
   const [state, dispatch] = useReducer(reducer, stateInit);
@@ -204,7 +198,7 @@ export default function Page() {
     if (state.gameState=="종료") e.stopPropagation();
   }
 
-  const contextValue = {
+  const contextValue : ContextType = {
     gameBoard : state.gameBoard,
     dispatch : dispatch
   }

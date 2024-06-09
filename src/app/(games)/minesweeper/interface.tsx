@@ -1,3 +1,5 @@
+import { Dispatch, createContext } from "react";
+
 export const numState = {
     normal : 0,
     mine : -1,
@@ -36,3 +38,10 @@ export const stateInit = {
     result : "",
     gameState : "시작전"   //시작전, 시작, 종료
   }
+
+  export interface ContextType {
+    gameBoard : number[][];
+    dispatch : Dispatch<actionType>;
+  }
+
+  export const TableContext = createContext<ContextType | undefined>(undefined);

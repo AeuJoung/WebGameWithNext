@@ -1,7 +1,8 @@
 import { useContext, useState, useMemo } from "react";
-import { GameContext, actionName} from "./page"
+
 import styles from "./game.module.css"
 import React from "react";
+import { GameContext, actionName } from "./gamecontext";
  
 function Td({cellData, cellIndex} : {cellData : number, cellIndex : number[]}) {
     const [checkClcik, setCheckClick] = useState<boolean>(false);
@@ -22,5 +23,6 @@ function Td({cellData, cellIndex} : {cellData : number, cellIndex : number[]}) {
         <td className={(checkClcik) ? styless.join(' ') : styles.cell} width={50} height={50} onClick={onTdEvent}>{cellData==-1 ? "" : (cellData==0 ? "O" : "X")}</td>
     );
 }
+
 
 export default React.memo(Td);

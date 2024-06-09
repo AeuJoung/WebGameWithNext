@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import styles from "./game.module.css"
-import { Dispatch, createContext, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import Table from "./Table";
+import { GameContext, actionName, actionType, initType } from "./gamecontext";
 
 const oxIndex = {
   o : 0,
@@ -15,17 +16,6 @@ const user = {
   pc2 : "pc2"
 }
 
-type actionType = { type : string, shape? : number, cellpos? : number[]};
-
-interface initType {
-  turnUser : string;
-  playBoard : number[][];
-  pc1Shape : number;
-  pc2Shape : number;
-  gameStart : boolean;
-  count : number;
-  hasWinner : boolean | null;
-}
 
 const initData : initType = {
   turnUser : user.pc1,
@@ -37,11 +27,6 @@ const initData : initType = {
   hasWinner : null
 }
 
-export const actionName = {
-  a_gameStart : 'gameStart',
-  WRITENUMBER : 'WRITENUMBER',
-  a_restart : 'RESTART',
-}
 
 function reducer(state : initType, action : actionType) : initType {
   switch(action.type) {
@@ -134,7 +119,6 @@ function reducer(state : initType, action : actionType) : initType {
   }
 }
 
-export const GameContext = createContext<Dispatch<actionType> | null>(null);
 
 export default function Page() {
   const [state, dispatch] = useReducer(reducer, initData);
